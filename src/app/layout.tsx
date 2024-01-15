@@ -5,13 +5,9 @@ import { Inter, Archivo } from "next/font/google";
 
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
-import Link from "next/link";
 import localFont from "next/font/local";
-import { Button, buttonVariants } from "@/components/ui/button";
-import GlobalContainer from "@/components/GlobalContainer";
-import { footerItems, footer_discalimer, footer_subline } from "@/data/footer";
-import { Facebook, GithubIcon, Linkedin, TwitterIcon } from "lucide-react";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const archivo = Archivo({ subsets: ["latin"], variable: "--font-archivo" });
@@ -95,158 +91,7 @@ export default function RootLayout({
         <div className="">
           <Footer />
         </div>
-        {/* <div className='pt-2 md:pt-[56px] w-full items-center h-full flex flex-col'>
-        <div className='w-full grow flex flex-col'>
-          <div className='sticky top-0 z-50'>
-            
-          </div>
-          <div className='w-full mx-auto grow max-w-3xl pb-8 px-4 lg:px-0'>{children}</div>
-          <footer className="p-[24px] bg-black text-white text-center w-full">
-            <p style={{ fontSize: "16px", color: "lightgray" }}>
-              Built with ❤️ by{" "}
-              <a href='https://bitcoindevs.xyz' target='_blank' rel='noopener noreferrer' style={{ color: "orange" }}>
-                The Bitcoin Dev Project
-              </a>
-            </p>
-            <a
-              href='https://cryptpad.fr/form/#/2/form/view/3P2CsohsHOkcH7C+WdtX0-tvqjBHqXnAmz5D9yx0e04/'
-              target='_blank'
-              rel='noopener noreferrer'
-              style={{ fontSize: "14px", color: "orange" }}
-            >
-              Submit Feedback
-            </a>
-            <p style={{ fontSize: "14px", color: "lightgray" }}>
-              Vistor counts publicly available via {" "}
-              <a
-                href='https://visits.bitcoindevs.xyz/share/btDhVSkbULr146OJ/tldr'
-                target='_blank'
-                rel='noopener noreferrer'
-                style={{ fontSize: "14px", color: "orange" }}
-              >
-                umami
-              </a>
-            </p>
-          </footer>
-        </div>
-      </div> */}
       </body>
     </html>
   );
 }
-
-export const Navbar = () => {
-  return (
-    <div className="w-full p-[20px] max-w-container border-[1px] border-division-medium rounded-[200px] flex mx-auto bg-primary-gray">
-      <div className="w-full flex justify-between items-center">
-        <div className="flex-[0_0_auto]">
-          <Image
-            className="mx-5"
-            src="mavapay.svg"
-            alt="MavaPay"
-            width={100}
-            height={10}
-            priority
-          />
-        </div>
-        <nav>
-          <ul className="flex gap-6 text-primary-text-black text-[14px] font-campton">
-            <li>
-              <Link href="/" className="hover:underline underline-offset-4">
-                API Guide
-              </Link>
-            </li>
-            <li>
-              <Link href="/" className="hover:underline underline-offset-4">
-                Contact Us
-              </Link>
-            </li>
-            <li>
-              <Link href="/" className="hover:underline underline-offset-4">
-                About Us
-              </Link>
-            </li>
-          </ul>
-        </nav>
-        <div>
-          <Button variant={"base"}>Get Started</Button>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const Footer = () => {
-  return (
-    <div>
-      <GlobalContainer>
-        <div className="mt-[33px] md:mt-[66px] flex flex-col md:flex-row flex-wrap gap-[10%] text-primary-text-black">
-          <div className="flex-[1_1_200px]">
-            <div className="md:min-h-9 mb-5 flex items-center">
-              <Image
-                className=""
-                src="mavapay.svg"
-                alt="MavaPay"
-                width={130}
-                height={20}
-                priority
-              />
-            </div>
-            <div>
-              <p className="font-campton md:text-xl font-normal">
-                {footer_subline}
-              </p>
-            </div>
-          </div>
-          <div className="flex-[1_1_40%] flex gap-[40px] flex-col sm:flex-row sm:justify-between">
-            {footerItems.map((item) => (
-              <div key={item.header} className="">
-                <p className="md:min-h-9 mb-5 font-archivo font-semibold text-2xl text-primary-text-black text-center md:text-left">
-                  {item.header}
-                </p>
-                <ul className="flex flex-col gap-6 text-center md:text-left">
-                  {item.nav.map((nav) => (
-                    <li key={nav.name}>
-                      <Link
-                        href={nav.link}
-                        className="block hover:underline underline-offset-4 font-campton text-sm"
-                      >
-                        {nav.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="max-w-[1079px] my-[70px] mx-auto flex flex-col gap-4 font-campton">
-          <p className="text-center text-primary-orange underline underline-offset-2">
-            Disclaimer
-          </p>
-          <p className="text-center text-primary-text-black">
-            {footer_discalimer}
-          </p>
-        </div>
-      </GlobalContainer>
-      <div className="bg-primary-gray-300 py-[36px] font-campton text-primary-gray-600">
-        <GlobalContainer className="flex justify-between">
-          <div className="flex items-center gap-2">
-            <div>
-              <Image src="cc.svg" alt="copyright" width={20} height={20} />
-            </div>
-            <p className="leading-none mt-[3px]">
-              {new Date().getFullYear()} MavaPay. All rights reserved
-            </p>
-          </div>
-          <div className="flex gap-2 md:gap-4">
-            <GithubIcon className="w-6 h-6" fill="#666666" />
-            <TwitterIcon className="w-6 h-6" fill="#666666" />
-            <Linkedin className="w-6 h-6" />
-            <Facebook className="w-6 h-6" />
-          </div>
-        </GlobalContainer>
-      </div>
-    </div>
-  );
-};
