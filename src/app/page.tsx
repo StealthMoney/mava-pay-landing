@@ -1,9 +1,320 @@
-import Image from 'next/image'
+import GlobalContainer from "@/components/GlobalContainer";
+import NewsletterForm from "@/components/newsletterForm";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
+import { Input } from "@/components/ui/input";
+import {
+  faq_items,
+  faq_text,
+  how_it_works_list,
+  mavapay_advantage_items,
+  mavapay_advantage_subline,
+  mavapay_business_items,
+  mavapay_business_subline,
+  newsletter_text,
+  user_testimonials_items,
+  user_testimonials_subline,
+} from "@/data/home";
+import { cn } from "@/lib/utils";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
+  const calculateSpan = (index: number) => {
+    const ff = mavapay_advantage_items[index].span;
+    switch (index) {
+      case 0:
+        return "md:col-span-7";
+      case 1:
+        return "md:col-span-5";
+      default:
+        return "md:col-span-4";
+    }
+  };
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
+    <main className="">
+      {/* HERO */}
+      <GlobalContainer>
+        <div className="flex pt-44 pb-16 gap-4">
+          <div className="flex-[1_1_50%] gap-4">
+            <h1 className="font-archivo font-bold text-[52px] leading-[84px] text-primary-text-black">
+              Secure, Swift, Business-Ready - Your Go-To API for Bitcoin to
+              Naira Conversions.
+            </h1>
+            <p className="mb-8 font-campton text-xl leading-[36px] text-primary-gray-500">
+              Experience the convenience of securely swapping your Bitcoin for
+              Naira, transferring it directly to your Nigerian bank account with
+              our user-friendly platform.
+            </p>
+            <Button
+              variant="base"
+              className="font-campton text-lg font-normal px-[48px] py-[21px] h-auto"
+            >
+              Get Started Now
+            </Button>
+          </div>
+          <div className="flex-[1_1_40%]">
+            <Image
+              src="/hero.png"
+              alt="hero"
+              width={1200}
+              height={800}
+              priority
+            />
+          </div>
+        </div>
+      </GlobalContainer>
+
+      {/* HOW IT WORKS */}
+      <div className="bg-primary-gray-300 pt-[103px] pb-[90px]">
+        <GlobalContainer>
+          <p className="font-campton font-medium text-lg text-primary-orange uppercase">
+            how it works
+          </p>
+          <div className="mt-[68px] flex gap-[54px] items-center">
+            <div>
+              <Image
+                src="/bitcoin_hero.png"
+                alt="bitcoin as a physical coin"
+                width={800}
+                height={800}
+                priority
+              />
+            </div>
+            <div>
+              <p className="font-archivo font-semibold text-[32px] text-primary-text-black leading-[48px] tracking-wider">
+                Ready to convert your Bitcoin to Naira hassle free?
+              </p>
+              <div className="mt-7 mb-12 flex flex-col gap-8">
+                {how_it_works_list.map((item, index) => (
+                  <div key={item} className="flex gap-4 items-end">
+                    <div className="grid place-items-center border-2 h-6 w-6 leading-none rounded-full border-primary-orange text-primary-orange">
+                      {index + 1}
+                    </div>
+                    <p className="font-campton text-xl leading-none text-[#212121]">
+                      {item}
+                    </p>
+                  </div>
+                ))}
+              </div>
+              <Button
+                variant="base"
+                className="font-campton text-lg font-normal px-[48px] py-[21px] h-auto"
+              >
+                Get Started Now
+              </Button>
+            </div>
+          </div>
+        </GlobalContainer>
+      </div>
+
+      {/* MAVAPAY ADVANTAGE */}
+      <div className="py-[103px]">
+        <GlobalContainer>
+          <p className="font-campton font-medium text-lg text-primary-orange uppercase">
+            the mavapay advantage
+          </p>
+          <div className="flex mt-[22px]">
+            <div className="flex-[0_1_60%] text-primary-text-black">
+              <h2 className="font-archivo font-semibold text-[32px] leading-[32px]">
+                Why Choose Mava Pay
+              </h2>
+              <p className="mt-5 font-campton text-lg leading-7">
+                {mavapay_advantage_subline}
+              </p>
+            </div>
+            <div className="flex-[1_1_auto]">
+              <Image
+                src="/advantage_arrow.svg"
+                alt="arrow"
+                width={200}
+                height={200}
+                // priority
+              />
+            </div>
+          </div>
+          <div className="mt-5 grid grid-cols-12 gap-6 text-primary-text-black">
+            {mavapay_advantage_items.map((item, index) => (
+              <div
+                key={item.heading}
+                // className={`flex flex-col gap-4 p-8 ${item.span} border border-division-medium rounded-[20px]`}
+                className={cn(
+                  "flex flex-col gap-4 p-8 border col-span-full border-division-medium rounded-[20px]",
+                  calculateSpan(index)
+                )}
+              >
+                <div className="w-16 h-16 rounded-full bg-primary-orange grid place-items-center">
+                  <Image
+                    src={`/advantage_0${index + 1}.svg`}
+                    alt="icon"
+                    width={32}
+                    height={32}
+                    // priority
+                  />
+                </div>
+                <p className="mb-2 font-archivo font-bold text-[28px] leading-[42px]">
+                  {item.heading}
+                </p>
+                <p className="font-campton text-2xl font-normal">
+                  {item.paragraph}
+                </p>
+              </div>
+            ))}
+          </div>
+        </GlobalContainer>
+      </div>
+
+      {/* MAVA PAY FOR BUSINESS */}
+      <div className="bg-primary-gray-300 py-[103px]">
+        <GlobalContainer>
+          <p className="font-campton font-medium text-lg text-primary-orange uppercase">
+            MAVA PAY FOR BUSINESS
+          </p>
+          <div className="flex mt-[22px] items-center">
+            <div className="flex-[0_1_60%] flex flex-col gap-[38px] text-primary-text-black">
+              <h2 className="font-archivo font-semibold text-[32px] leading-[60px]">
+                {mavapay_business_subline}
+              </h2>
+              <div className="flex flex-col gap-8">
+                {mavapay_business_items.map((item) => (
+                  <div key={item} className="flex items-start gap-4">
+                    <div className="mt-2 w-2 h-2 bg-primary-orange rounded-full"></div>
+                    <p className="font-campton text-xl leading-[30px] text-[#212121]">
+                      {item}
+                    </p>
+                  </div>
+                ))}
+              </div>
+              <Button
+                variant="base"
+                className="font-campton text-lg font-normal px-[3ch] py-[1.5ch] h-auto w-fit"
+              >
+                Get Started Now
+              </Button>
+            </div>
+            <div className="relative">
+              <Image
+                className="-translate-x-[10%]"
+                src="/business_arrow.svg"
+                alt="upwards arrow illustration"
+                width={600}
+                height={600}
+                // priority
+              />
+            </div>
+          </div>
+        </GlobalContainer>
+      </div>
+
+      {/* USER STORIES */}
+      <div className="py-[103px]">
+        <GlobalContainer>
+          <p className="font-campton font-medium text-lg text-primary-orange uppercase">
+            WHAT OUR USERS ARE SAYING
+          </p>
+          <h2 className="mt-[22px] font-archivo font-semibold text-[32px] leading-[60px]">
+            {user_testimonials_subline}
+          </h2>
+          <Carousel className="w-full mt-[60px]">
+            <CarouselContent>
+              {user_testimonials_items.map((item) => (
+                <CarouselItem
+                  key={item.author}
+                  className="flex gap-[5%] items-center"
+                >
+                  <div className="flex-[0_1_435px]">
+                    <Image
+                      src={item.img}
+                      alt="upwards arrow illustration"
+                      width={600}
+                      height={600}
+                      // priority
+                    />
+                  </div>
+                  <div className="flex-[1_1_50%]">
+                    <span className="font-archivo font-bold text-[50px] md:text-[150px] leading-none text-primary-orange opacity-50">
+                      “
+                    </span>
+                    <p className="font-campton text-[28px] leading-[44px] text-primary-text-black">
+                      {item.text}
+                    </p>
+                    <div className="flex flex-col gap-2 mt-16">
+                      <p className="font-archivo tracking-widest font-medium text-[24px] leading-[36px] text-primary-text-black">
+                        {item.author}
+                      </p>
+                      <p className="font-campton text-[20px] leading-[24px] text-primary-gray-600">
+                        {item.occupation}
+                      </p>
+                    </div>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+        </GlobalContainer>
+      </div>
+
+      {/* FAQS */}
+      <div className="py-[103px]">
+        <GlobalContainer>
+          <p className="font-campton font-medium text-lg text-primary-orange uppercase">
+            SUPPORT
+          </p>
+          <div className="flex mt-[22px] gap-[5%] text-primary-text-black">
+            <div className="flex-[1_1_45%] flex flex-col gap-[38px] text-primary-text-black">
+              <h2 className="font-archivo font-semibold text-[32px] leading-[60px]">
+                FAQS
+              </h2>
+              <p className="font-campton text-xl leading-[30px]">
+                {faq_text}
+                {" "}
+                <span className="font-medium text-primary-orange underline underline-offset-2">
+                  <Link href="/">Contact Us</Link>
+                </span>
+              </p>
+            </div>
+            <div className="flex-[1_1_55%] font-campton text-primary-text-black">
+              <Accordion type="single" collapsible className="w-full">
+                {faq_items.map((item) => (
+                  <AccordionItem key={item.heading} value={item.heading}>
+                    <AccordionTrigger className="mt-4 text-xl leading-[30px]">
+                      {item.heading}
+                    </AccordionTrigger>
+                    <AccordionContent>{item.description}</AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </div>
+          </div>
+        </GlobalContainer>
+      </div>
+
+      {/* NEWSLETTER */}
+      <div className="bg-primary-gray-300 py-[103px]">
+        <GlobalContainer>
+          <div className="w-[80%] mx-auto bg-primary-orange rounded-[10px] py-[86px] px-[150px]">
+            <div className="flex flex-col gap-[20px]">
+              <p className="font-campton font-medium text-2xl text-white leading-[44px]">
+                {newsletter_text}
+              </p>
+              <NewsletterForm />
+            </div>
+          </div>
+        </GlobalContainer>
+      </div>
+
+      {/* <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
         <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-100/30">
           Get started by editing&nbsp;
           <code className="font-mono font-bold">src/app/page.tsx</code>
@@ -107,7 +418,7 @@ export default function Home() {
             Instantly deploy your Next.js site to a shareable URL with Vercel.
           </p>
         </a>
-      </div>
+      </div> */}
     </main>
-  )
+  );
 }

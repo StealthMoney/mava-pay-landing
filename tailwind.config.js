@@ -23,12 +23,16 @@ module.exports = {
       fontFamily: {
         inter: ['var(--font-inter)'],
         archivo: ['var(--font-archivo)'],
-        campton: ['Campton', 'sans-serif']
+        campton: ['var(--font-campton)']
+        // campton: ['Campton', 'sans-serif']
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      },
+      maxWidth: {
+        container: "var(--max-container-width)",
       },
       colors: {
         border: "hsl(var(--border))",
@@ -39,6 +43,16 @@ module.exports = {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
+          gray: {
+            DEFAULT: "#F7F8F9",
+            300: "#F9FAFC",
+            500: "#555555",
+            600: "#666666"
+          },
+          text: {
+            black: "#090909",
+          },
+          orange: "#F2B246",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
@@ -64,6 +78,9 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        division: {
+          medium: "#BFC4D9"
+        }
       },
       borderRadius: {
         lg: "var(--radius)",
